@@ -3,6 +3,13 @@ This is API application for testing purposes.
 It's to test compatibility of LINQ to SQL with older version of SQL Server 2014 
 Compatibility level 120
 
+1. Using LINQ to SQL method Contains will cause SQLException
+"Incorrect syntax near '$'"
+
+2. To fix we use EF.Contains
+
+3. But #2 raise the problem with unit test.
+
 Also it's to write XUnit test.
 
 Details here:

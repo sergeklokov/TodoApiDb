@@ -48,7 +48,6 @@ namespace TodoApiDb.Controllers
             return todoItem;
         }
 
-
         [HttpGet("GetABunch")]
         public async Task<ActionResult<TodoItem>> GetABunch()
         {
@@ -58,6 +57,14 @@ namespace TodoApiDb.Controllers
             var animals = await _context.TodoItems
                 .Where(i => myAnimals.Contains(i.Name))
                 .ToListAsync();
+
+            return Ok(animals);
+        }
+
+        [HttpGet("GetABunch120")]
+        public async Task<ActionResult<TodoItem>> GetABunch120()
+        {
+            string[] myAnimals = { "dog", "cat" };
 
             //works in MS SQL 2014
             var animals = await _context.TodoItems
