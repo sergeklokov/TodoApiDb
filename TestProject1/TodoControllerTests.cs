@@ -2,12 +2,20 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Moq;
 using TodoApiDb.Controllers;
+using TodoApiDb.Data;
 using TodoApiDb.Models;
 
 namespace TestProject1
 {
     public class TodoControllerTests
     {
+        private readonly Mock<ITodoItemsService> _mockTodoItemsService;
+
+        public TodoControllerTests()
+        {
+            _mockTodoItemsService = new Mock<ITodoItemsService>();
+        }
+
         //not working
         [Fact]
         public async Task GetABunch_ReturnsFilteredTodoItems()

@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using TodoApiDb.Data;
 using TodoApiDb.Models;
 
 namespace TodoApiDb.Controllers
@@ -14,8 +15,10 @@ namespace TodoApiDb.Controllers
     public class TodoItemsController : ControllerBase
     {
         private readonly TodoContext _context;
+        private ITodoItemsService _todoItemsService;
 
-        public TodoItemsController(TodoContext context)
+        public TodoItemsController(
+            TodoContext context) 
         {
             _context = context;
         }
@@ -31,6 +34,11 @@ namespace TodoApiDb.Controllers
         [HttpGet("GetTodoItems2")]
         public async Task<ActionResult<IEnumerable<TodoItem>>> GetTodoItems2()
         {
+            string[] myAnimals = { "dog", "cat" };
+
+            _todoItemsService = new TodoItemsService(_context.TodoItems);
+
+            _todoItemsService.GetAbunch(myAnimals);
             return await _context.TodoItems.ToListAsync();
         }
 
@@ -50,6 +58,19 @@ namespace TodoApiDb.Controllers
 
         [HttpGet("GetABunch")]
         public async Task<ActionResult<TodoItem>> GetABunch()
+        {
+            string[] myAnimals = { "dog", "cat" };
+
+            //works in MS SQL 2017
+            var animals = await _context.TodoItems
+                .Where(i => myAnimals.Contains(i.Name))
+                .ToListAsync();
+
+            return Ok(animals);
+        }
+
+        [HttpGet("GetABunchV2")]
+        public async Task<ActionResult<TodoItem>> GetABunchV2()
         {
             string[] myAnimals = { "dog", "cat" };
 

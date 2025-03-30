@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using TodoApiDb.Data;
 using TodoApiDb.Models;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,9 +13,11 @@ builder.Services.AddControllers();
 const string connectionLifeDb = "Data Source=.;Initial Catalog=LifelongLearning;Integrated Security=True;TrustServerCertificate=Yes";
 
 builder.Services.AddDbContext<TodoContext>(opt =>
-    opt.UseSqlServer(connectionLifeDb)); 
-    //opt.UseSqlServer(Configuration.GetConnectionString("LifeDb"));
+    opt.UseSqlServer(connectionLifeDb));
+//opt.UseSqlServer(Configuration.GetConnectionString("LifeDb"));
 //opt.UseInMemoryDatabase("TodoList"));
+
+//builder.Services.AddScoped<ITodoItemsService, TodoItemsService>();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

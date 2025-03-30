@@ -16,5 +16,9 @@ Details here:
 Breaking changes in EF Core 8 (EF8)
 https://learn.microsoft.com/en-us/ef/core/what-is-new/ef-core-8.0/breaking-changes
 
+My stack overflow question:
 How to unit test LINQ with EF.Constant?
 https://stackoverflow.com/questions/79542141/how-to-unit-test-linq-with-ef-constant
+
+EF Core 8 Preview 4: Primitive collections and improved Contains
+https://devblogs.microsoft.com/dotnet/announcing-ef8-preview-4/
