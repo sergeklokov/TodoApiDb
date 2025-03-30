@@ -9,11 +9,93 @@ namespace TestProject1
 {
     public class TodoControllerTests
     {
-        private readonly Mock<ITodoItemsService> _mockTodoItemsService;
+        private readonly Mock<ITodoItemsService> _todoServiceMock;
+        private readonly List<TodoItem> _mockData;
 
         public TodoControllerTests()
         {
-            _mockTodoItemsService = new Mock<ITodoItemsService>();
+            _todoServiceMock = new Mock<ITodoItemsService>();
+
+            // Setup mock data
+            _mockData = new List<TodoItem>
+            {
+                new TodoItem { Name = "Cat" },
+                new TodoItem { Name = "Dog" },
+                new TodoItem { Name = "Bird" },
+                new TodoItem { Name = "Fish" }
+            };
+        }
+
+        [Fact]
+        public void GetAbunch_WithMatchingAnimals_ReturnsCorrectItems()
+        {
+            // Arrange
+            var inputAnimals = new[] { "Cat", "Dog" };
+            var expectedCount = 2;
+
+            _todoServiceMock.Setup(x => x.GetAbunch(inputAnimals))
+                .Returns(_mockData.Where(i => inputAnimals.Contains(i.Name)).ToList());
+
+            // Act
+            var result = _todoServiceMock.Object.GetAbunch(inputAnimals);
+
+            // Assert
+            Assert.NotNull(result);
+            Assert.Equal(expectedCount, result.Count);
+            Assert.Contains(result, item => item.Name == "Cat");
+            Assert.Contains(result, item => item.Name == "Dog");
+            Assert.DoesNotContain(result, item => item.Name == "Bird");
+        }
+
+        [Fact]
+        public void GetAbunch_WithNoMatchingAnimals_ReturnsEmptyList()
+        {
+            // Arrange
+            var inputAnimals = new[] { "Elephant", "Lion" };
+
+            _todoServiceMock.Setup(x => x.GetAbunch(inputAnimals))
+                .Returns(_mockData.Where(i => inputAnimals.Contains(i.Name)).ToList());
+
+            // Act
+            var result = _todoServiceMock.Object.GetAbunch(inputAnimals);
+
+            // Assert
+            Assert.NotNull(result);
+            Assert.Empty(result);
+        }
+
+        [Fact]
+        public void GetAbunch_WithEmptyArray_ReturnsEmptyList()
+        {
+            // Arrange
+            var inputAnimals = new string[] { };
+
+            _todoServiceMock.Setup(x => x.GetAbunch(inputAnimals))
+                .Returns(_mockData.Where(i => inputAnimals.Contains(i.Name)).ToList());
+
+            // Act
+            var result = _todoServiceMock.Object.GetAbunch(inputAnimals);
+
+            // Assert
+            Assert.NotNull(result);
+            Assert.Empty(result);
+        }
+
+        [Fact]
+        public void GetAbunch_WithNullArray_ReturnsEmptyList()
+        {
+            // Arrange
+            string[] inputAnimals = null;
+
+            _todoServiceMock.Setup(x => x.GetAbunch(inputAnimals))
+                .Returns(new List<TodoItem>());
+
+            // Act
+            var result = _todoServiceMock.Object.GetAbunch(inputAnimals);
+
+            // Assert
+            Assert.NotNull(result);
+            Assert.Empty(result);
         }
 
         //not working

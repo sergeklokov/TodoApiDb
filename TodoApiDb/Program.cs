@@ -17,7 +17,7 @@ builder.Services.AddDbContext<TodoContext>(opt =>
 //opt.UseSqlServer(Configuration.GetConnectionString("LifeDb"));
 //opt.UseInMemoryDatabase("TodoList"));
 
-//builder.Services.AddScoped<ITodoItemsService, TodoItemsService>();
+builder.Services.AddScoped<ITodoItemsService, TodoItemsService>();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
