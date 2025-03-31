@@ -146,8 +146,9 @@ namespace TestProject1
             using var context = new TodoContext(options);
             context.TodoItems.AddRange(
                 new TodoItem { Id = 1, Name = "dog" },
-                new TodoItem { Id = 2, Name = "cat" },
-                new TodoItem { Id = 3, Name = "bird" });
+                new TodoItem { Id = 2, Name = "cat" }
+                //,new TodoItem { Id = 3, Name = "bird" }
+                );
             await context.SaveChangesAsync();
 
             var controller = new TodoItemsController(context);
@@ -158,6 +159,7 @@ namespace TestProject1
             Assert.Equal(2, items.Count);
             Assert.Contains(items, i => i.Name == "dog");
             Assert.Contains(items, i => i.Name == "cat");
+            Assert.DoesNotContain(items, i => i.Name == "Bird");
         }
     }
 }
