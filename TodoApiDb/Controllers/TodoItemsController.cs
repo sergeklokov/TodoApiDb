@@ -36,7 +36,7 @@ namespace TodoApiDb.Controllers
         {
             string[] myAnimals = { "dog", "cat" };
 
-            _todoItemsService = new TodoItemsService(_context.TodoItems);
+            _todoItemsService = new TodoItemsService(_context);
 
             _todoItemsService.GetAbunch(myAnimals);
             return await _context.TodoItems.ToListAsync();

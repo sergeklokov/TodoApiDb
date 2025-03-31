@@ -12,13 +12,18 @@ Compatibility level 120
 
 Also it's to write XUnit test.
 
-Details here:
+Articles I read:
 Breaking changes in EF Core 8 (EF8)
 https://learn.microsoft.com/en-us/ef/core/what-is-new/ef-core-8.0/breaking-changes
 
-My stack overflow question:
+EF Core 8 Preview 4: Primitive collections and improved Contains
+https://devblogs.microsoft.com/dotnet/announcing-ef8-preview-4/
+
+My stack overflow questions:
 How to unit test LINQ with EF.Constant?
 https://stackoverflow.com/questions/79542141/how-to-unit-test-linq-with-ef-constant
 
-EF Core 8 Preview 4: Primitive collections and improved Contains
-https://devblogs.microsoft.com/dotnet/announcing-ef8-preview-4/
+AddScoped cause System.AggregateException: 
+Some services are not able to be constructed (Error while validating the service descriptor 'ServiceType:
+https://stackoverflow.com/questions/79544123/addscoped-cause-system-aggregateexception-some-services-are-not-able-to-be-con
+
