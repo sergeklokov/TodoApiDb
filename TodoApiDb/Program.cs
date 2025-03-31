@@ -10,7 +10,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 
-const string connectionLifeDb = "Data Source=.;Initial Catalog=LifelongLearning;Integrated Security=True;TrustServerCertificate=Yes";
+//const string connectionLifeDb = "Data Source=.;Initial Catalog=LifelongLearning;Integrated Security=True;TrustServerCertificate=Yes";
+var connectionLifeDb = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build().GetSection("ConnectionStrings")["DefaultConnection"];
 
 builder.Services.AddDbContext<TodoContext>(opt =>
     opt.UseSqlServer(connectionLifeDb));

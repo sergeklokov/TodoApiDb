@@ -27,3 +27,5 @@ AddScoped cause System.AggregateException:
 Some services are not able to be constructed (Error while validating the service descriptor 'ServiceType:
 https://stackoverflow.com/questions/79544123/addscoped-cause-system-aggregateexception-some-services-are-not-able-to-be-con
 
+To read AppSettings values from a .json file in ASP.NET Core
+https://stackoverflow.com/questions/31453495/how-to-read-appsettings-values-from-a-json-file-in-asp-net-core
