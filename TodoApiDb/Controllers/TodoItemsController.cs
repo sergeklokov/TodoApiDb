@@ -21,6 +21,7 @@ namespace TodoApiDb.Controllers
             TodoContext context) 
         {
             _context = context;
+            _todoItemsService = new TodoItemsService(_context);
         }
 
         // GET: api/TodoItems
@@ -30,13 +31,11 @@ namespace TodoApiDb.Controllers
             return await _context.TodoItems.ToListAsync();
         }
 
-        // GET: api/TodoItems
-        [HttpGet("GetTodoItems2")]
-        public async Task<ActionResult<IEnumerable<TodoItem>>> GetTodoItems2()
+        // using data layer
+        [HttpGet("GetTodoItemsByDataService")]
+        public async Task<ActionResult<IEnumerable<TodoItem>>> GetTodoItemsByDataService()
         {
             string[] myAnimals = { "dog", "cat" };
-
-            _todoItemsService = new TodoItemsService(_context);
 
             _todoItemsService.GetAbunch(myAnimals);
             return await _context.TodoItems.ToListAsync();
